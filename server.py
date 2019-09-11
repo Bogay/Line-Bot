@@ -7,6 +7,4 @@ SB = simple_bot()
 def webhook():
 	return 'Hi'
 
-
-if __name__ == '__main__':
-    run(bot=SB)
+SB.init_reply()

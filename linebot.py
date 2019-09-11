@@ -73,12 +73,6 @@ class simple_bot(Bottle):
         return self.post('/webhook')(webhook_func(func))
 
 
-def run(bot=None, **kwds):
-    if bot:
-        bot.init_reply()
-        bot.run(**kwds)
-
-
 def validate_signature(func):
     @wraps(func)
     def wrapper(*args, **kwds):
