@@ -65,7 +65,7 @@ class simple_bot(Bottle):
                     token = body[0].get('replyToken') if body else None
                     text = body[0]['message']['text']
                     data = {'token': token}
-                    requests.post(f'https://127.0.0.1/regex/{text}', data=data)
+                    requests.post(f'https://localhost/regex/{text}', data=data)
 
                 return ret
             return wrapper
