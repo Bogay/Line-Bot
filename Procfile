@@ -1,1 +1,1 @@
-web gunicorn -b 0.0.0.0:46431 server:SB --log-file -
+web gunicorn server:SB --log-file -

@@ -11,6 +11,7 @@ import configparser
 
 channel_secret = os.environ.get('channel_secret')
 access_token = os.environ.get('access_token')
+PORT = os.environ.get('PORT')
 
 HEADERS = {
     'Content-Type': 'application/json',
@@ -65,7 +66,7 @@ class simple_bot(Bottle):
                     token = body[0].get('replyToken') if body else None
                     text = body[0]['message']['text']
                     data = {'token': token}
-                    requests.post(f'http://localhost:46431/regex/{text}', data=data)
+                    requests.post(f'http://localhost:{PORT}/regex/{text}', data=data)
 
                 return ret
             return wrapper
