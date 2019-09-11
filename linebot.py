@@ -12,7 +12,7 @@ import configparser
 channel_secret = os.environ.get('channel_secret')
 access_token = os.environ.get('access_token')
 
-headers = {
+HEADERS = {
     'Content-Type': 'application/json',
     'Authorization': f'Bearer {{{access_token}}}'
 }
@@ -61,8 +61,11 @@ class simple_bot(Bottle):
             def wrapper(*args, **kwds):
                 ret = gunc(*args, **kwds)
                 body = json.loads(request.body.read().decode('utf8')).get('events')
-                if body and body[0].get('message', {}).get('type') == 'text':
-                    pass
+                token = body.get('replyToken') if body else None
+                if token and body and body[0].get('message', {}).get('type') == 'text':
+                    text = body[0]['message']['text']
+                    data = {'token': token}
+                    requests.post(f'https://127.0.0.1/regex/{text}', data=data)
 
                 return ret
             return wrapper
@@ -91,14 +94,13 @@ def validate_signature(func):
 
 def reply(msg):
     def reply_func():
-        body = json.loads(request.body.read().decode('utf8')).get('events')
-        token = body.get('replyToken') if body else None
+        token = request.forms.get('token')
         if token:
             data = {
                 'replyToken': token,
                 'messages': [msg]
             }
-            requests.post(REPLY_URL, headers=headers, json=data)
+            requests.post(REPLY_URL, headers=HEADERS, json=data)
 
     return reply_func
         
