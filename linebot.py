@@ -25,6 +25,7 @@ class simple_bot(Bottle):
     def __init__(self, reply_cfg='reply.cfg'):
         Bottle.__init__(self)
         self.reply_cfg = reply_cfg
+        self.init_reply()
 
 
     def init_reply(self):
@@ -38,17 +39,18 @@ class simple_bot(Bottle):
             rep = r.get('regex')
             kwd = r.get('keywd')
             if rep:
-                globals()[key] = self.regex(rep)(reply(r))
+                globals()[key] = self.regex(rep)(lambda: r)
             elif kwd:
                 kwds_list = kwd.split('|')
-                globals()[key] = self.keywds(kwds_list)(reply(r))
-        for r in self.routes:
-            print(r)
+                globals()[key] = self.keywds(kwds_list)(lambda: r)
 
 
     def regex(self, rep):
+        def msg_func(func):
+            reply_func = reply(func())
 
-        return self.post(f'/regex/<:re:{rep}>')
+            return self.post(f'/regex/<:re:{rep}>')(reply_func)
+        return msg_func
 
 
     def keywds(self, kwds_list):
