@@ -29,6 +29,7 @@ class simple_bot(Bottle):
 
     def init_reply(self):
         reply_list = configparser.ConfigParser()
+        reply_list.optionxform = str
         reply_list.read(self.reply_cfg)
         for key in reply_list.keys():
             if key in globals():
