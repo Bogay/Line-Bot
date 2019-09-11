@@ -33,7 +33,7 @@ class simple_bot(Bottle):
         for key in reply_list.keys():
             if key in globals():
                 raise ValueError(f'Name \'{key}\' has been used.')
-            r = reply_list[key]
+            r = {**reply_list[key]}
             rep = r.get('regex')
             kwd = r.get('keywd')
             if rep:
