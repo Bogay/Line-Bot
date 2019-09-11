@@ -61,8 +61,8 @@ class simple_bot(Bottle):
             def wrapper(*args, **kwds):
                 ret = gunc(*args, **kwds)
                 body = json.loads(request.body.read().decode('utf8')).get('events')
-                token = body.get('replyToken') if body else None
-                if token and body and body[0].get('message', {}).get('type') == 'text':
+                if body and body[0].get('message', {}).get('type') == 'text':
+                    token = body[0].get('replyToken') if body else None
                     text = body[0]['message']['text']
                     data = {'token': token}
                     requests.post(f'https://127.0.0.1/regex/{text}', data=data)
