@@ -1,0 +1,15 @@
+{
+    "name": "Line Bot",
+    "description": "Simple Line Chat Bot",
+    "repository": "https://github.com/AlaRduTP/Line-Bot",
+    "env": {
+        "access_token": {
+            "description": "Long-lived token required for making API calls.",
+            "required": true
+        },
+        "channel_secret": {
+            "description": "Unique secret key for the channel",
+            "required": true
+        }
+    }
+}
