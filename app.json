@@ -1,6 +1,6 @@
 {
     "name": "Line Bot",
-    "description": "Simple Line Chat Bot",
+    "description": "TeShi Line Chat Bot",
     "repository": "https://github.com/AlaRduTP/Line-Bot",
     "env": {
         "access_token": {
