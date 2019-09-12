@@ -8,7 +8,7 @@ def webhook():
 	pass
 
 
-@SB.regex(r'^foo\d+$')
+@SB.regex(r'foo\d+')
 def foo():
 	msg = {
 		'type': 'text',
@@ -24,3 +24,6 @@ def bar():
 		'text': 'abr!!'
 	}
 	return msg
+
+for r in SB.routes:
+	print(r)
