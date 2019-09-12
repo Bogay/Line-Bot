@@ -1,4 +1,4 @@
-from linebot import simple_bot, reply
+from linebot import simple_bot
 
 SB = simple_bot()
 
