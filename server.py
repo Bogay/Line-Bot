@@ -24,6 +24,3 @@ def bar():
 		'text': 'abr!!'
 	}
 	return msg
-
-for r in SB.routes:
-	print(r)
